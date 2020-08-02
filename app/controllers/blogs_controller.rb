@@ -4,7 +4,14 @@ class BlogsController < ApplicationController
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs = Blog.all
+    if !current_user
+      @blogs = Blog.where(status: 2)
+    elsif current_user.member?
+      @blogs= Blog.where('status = ? OR status = ?', 1, 2)
+    else # current_user.author?
+      @blogs = Blog.where('user_id = ? OR status = ? OR status = ?', current_user.id, 1, 2)
+      # @blogs = current_user.blogs.or( Blog.where(status: 1).or(Blog.where(status: 2)) ) # I prefer the SQL syntax much better
+    end
   end
 
   # GET /blogs/1
