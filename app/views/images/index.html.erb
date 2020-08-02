@@ -12,7 +12,7 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody id="image_list">
     <% @images.each do |image| %>
       <tr>
         <td><%= image.filename %></td>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Image', new_image_path %>
+<%= link_to 'New Image', new_image_path, id: 'new_image_link', remote: true %>
