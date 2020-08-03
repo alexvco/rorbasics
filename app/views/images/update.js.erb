@@ -7,4 +7,8 @@
   $('#edit_image_form').remove();
   $('#edit_image_link').show();
   $('#image_show').replaceWith('<%= j render(template: "images/show.html") %>');
+
+  // updating from/for index action
+  $('.clicked').replaceWith('<%= j render(@image) %>');
+  $('#new_image_link').show();
 <% end %>

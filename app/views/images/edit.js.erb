@@ -1,1 +1,5 @@
 $('#edit_image_link').hide().after('<%= j render("form", image: @image, id: "edit_image_form") %>');
+
+// the following is to edit from the index action
+$('#edit_image_form').remove();
+$('#new_image_link').hide().after('<%= j render("form", image: @image, id: "edit_image_form") %>');

@@ -18,4 +18,10 @@ require("jquery")
 // const imagePath = (name) => images(name, true)
 $(document).ready(function(){
 	console.log('toto');
+
+  $('.edit_image_index').on('click', function() {
+    $('tr').removeClass('clicked');
+    $(this).closest('tr').addClass('clicked');
+  })
+
 })
