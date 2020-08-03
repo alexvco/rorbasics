@@ -1,0 +1,10 @@
+
+<% if @image.errors.any? %>
+  $('#error_explanation').remove();
+  $('#edit_image_form').prepend('<%= j render("errors") %>');
+<% else %>
+  $('#error_explanation').remove();
+  $('#edit_image_form').remove();
+  $('#edit_image_link').show();
+  $('#image_show').replaceWith('<%= j render(template: "images/show.html") %>');
+<% end %>

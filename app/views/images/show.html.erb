@@ -1,3 +1,4 @@
+<div id="image_show">
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -15,5 +16,6 @@
   <%= @image.imageable_id %>
 </p>
 
-<%= link_to 'Edit', edit_image_path(@image) %> |
+<%= link_to 'Edit', edit_image_path(@image), id: 'edit_image_link', remote: true %> |
 <%= link_to 'Back', images_path %>
+</div>
