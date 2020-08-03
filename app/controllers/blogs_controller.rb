@@ -12,6 +12,8 @@ class BlogsController < ApplicationController
       @blogs = Blog.where('user_id = ? OR status = ? OR status = ?', current_user.id, 1, 2)
       # @blogs = current_user.blogs.or( Blog.where(status: 1).or(Blog.where(status: 2)) ) # I prefer the SQL syntax much better
     end
+    # Syntax to render default 404 page
+    # render :file => "#{Rails.root}/public/404.html",  layout: false, status: :not_found
   end
 
   # GET /blogs/1
