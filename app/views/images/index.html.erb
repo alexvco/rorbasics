@@ -20,7 +20,7 @@
         <td><%= image.imageable_id %></td>
         <td><%= link_to 'Show', image %></td>
         <td><%= link_to 'Edit', edit_image_path(image) %></td>
-        <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: 'delete_image' %></td>
       </tr>
     <% end %>
   </tbody>
