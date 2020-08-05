@@ -12,4 +12,12 @@ class Blog < ApplicationRecord
   # the allow_nil: true option is to return Blog.first.author_first_name nil as opposed to an error when author is nil
   # more on delegate here: https://apidock.com/rails/Module/delegate
   delegate :first_name, to: :author, prefix: :author, allow_nil: true
+
+  validate :has_at_least_one_category
+
+  def has_at_least_one_category
+    if categories.empty?
+      errors.add(:categories, "need one category at least")
+    end
+  end
 end

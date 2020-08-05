@@ -28,7 +28,16 @@
 
   <div class="field">
     <%= form.label :status %>
-    <%= form.number_field :status %>
+    <%= form.select :status, Blog.statuses.map { |k, v| [k, k] } %>
+  </div>
+
+  <div>
+    <%= hidden_field_tag "blog[category_ids][]", nil %> <!-- This is a workaround for updating the blog to one without a category -->
+    <% Category.all.each do |category| %>
+      <% checked = blog.category_ids.include?(category.id) %>
+      <%= check_box_tag "blog[category_ids][]", category.id, checked, id: "category_#{category.id}" %>
+      <%= label_tag "category_#{category.id}", category.name %>
+    <% end %>
   </div>
 
   <div class="actions">

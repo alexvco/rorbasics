@@ -20,5 +20,17 @@
   <%= @blog.status %>
 </p>
 
+<% if @blog.categories.any? %>
+  <p>
+    <strong>Categories:</strong>
+    <% @blog.categories.each do |category| %>
+      <br>
+      <%= category.name %>
+    <% end %>
+  </p>
+<% else %>
+  <p><strong>Please add some categories to this blog</strong></p>
+<% end %>
+
 <%= link_to 'Edit', edit_blog_path(@blog) %> |
 <%= link_to 'Back', blogs_path %>
