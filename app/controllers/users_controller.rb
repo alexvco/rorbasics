@@ -19,10 +19,12 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @addresses = @user.addresses.build
   end
 
   # GET /users/1/edit
   def edit
+    @addresses = @user.addresses
   end
 
   # POST /users
@@ -80,6 +82,6 @@ class UsersController < ApplicationController
         params[:user] = params.delete :author
       end
 
-      params.require(:user).permit(:email, :type, :first_name, :last_name)
+      params.require(:user).permit(:email, :type, :first_name, :last_name, addresses_attributes: [:id, :city, :zip])
     end
 end

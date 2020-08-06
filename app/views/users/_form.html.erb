@@ -31,6 +31,20 @@
     <%= form.text_field :last_name %>
   </div>
 
+  <%= form.fields_for :addresses, @addresses do |f| %>
+    <div class="field">
+      <%= f.label :city %>
+      <%= f.text_field :city %>
+    </div>
+
+    <div class="field">
+      <%= f.label :zip %>
+      <%= f.text_field :zip %>
+    </div>
+  <% end %>
+
+  <br>
+
   <div class="actions">
     <%= form.submit %>
   </div>
