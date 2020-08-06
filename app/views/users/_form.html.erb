@@ -32,6 +32,10 @@
   </div>
 
   <%= form.fields_for :addresses, @addresses do |f| %>
+    <div class="delete_address_container">
+      <a class="delete_address" href="#">delete</a>
+    </div>
+
     <div class="field">
       <%= f.label :city %>
       <%= f.text_field :city %>
@@ -42,6 +46,10 @@
       <%= f.text_field :zip %>
     </div>
   <% end %>
+
+  <div class="add_address_link_container">
+    <%= link_to "Add another address", "#", id: 'add_address', class: 'add_address_link' %>
+  </div>
 
   <br>
 
