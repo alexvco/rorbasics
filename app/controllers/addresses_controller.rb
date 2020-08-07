@@ -19,10 +19,12 @@ class AddressesController < ApplicationController
   # GET /addresses/new
   def new
     @address = Address.new
+    @user = @address.build_user
   end
 
   # GET /addresses/1/edit
   def edit
+    @user = @address.user
   end
 
   # POST /addresses
@@ -73,6 +75,6 @@ class AddressesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def address_params
-      params.require(:address).permit(:city, :zip, :street, :user_id)
+      params.require(:address).permit(:city, :zip, :street, :user_id, user_attributes: [:id, :first_name, :last_name, :email, :type])
     end
 end
