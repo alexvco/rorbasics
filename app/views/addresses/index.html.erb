@@ -26,6 +26,17 @@
   </tbody>
 </table>
 
+<div>
+  <a style='display: <%= @page_number < 2 ? "none" : 'inline' %>;' href='<%= "/addresses?page=#{@page_number - 1}" %>'>Prev</a>
+  <br>
+  <% @number_of_pages.times do |page_num| %>
+    <a style='margin-right: 10px; background-color: <%= (@page_number == (page_num + 1)) ? "yellow" : "transparent" %>;' href=<%= "/addresses?page=#{page_num + 1}"%>> <%= page_num + 1 %> </a>
+  <% end %>
+  <br>
+  <!-- same as Prev just using rails link_to here for syntax, also added class -->
+  <%= link_to 'Next', addresses_path(page: @page_number + 1), {style: "display: #{@page_number == @number_of_pages ? 'none;' : 'inline;'}", class: "any_class"} %>
+  <br>
+</div>
 <br>
 
 <%= link_to 'New Address', new_address_path %>

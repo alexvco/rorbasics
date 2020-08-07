@@ -4,7 +4,11 @@ class AddressesController < ApplicationController
   # GET /addresses
   # GET /addresses.json
   def index
-    @addresses = Address.all
+    address_count = Address.count
+    @page_number = params[:page].to_i.positive? ? params[:page].to_i : 1
+    offset = Address::PER_PAGE * (@page_number - 1)
+    @number_of_pages = (address_count.to_f/Address::PER_PAGE).ceil
+    @addresses = Address.order(id: :asc).limit(Address::PER_PAGE).offset(offset)
   end
 
   # GET /addresses/1
