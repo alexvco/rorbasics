@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :visitors
   resources :addresses
   resources :categories
+  resources :password_resets
   root 'blogs#index'
 
   resources :images
