@@ -11,6 +11,12 @@
     <%= password_field_tag :password %>
   </div>
 
+  <br>
+  <div class="field">
+    <%= label_tag :remember_me %>
+    <%= check_box_tag :remember_me, 1, true %>
+  </div>
+
   <div class="action">
     <%= submit_tag "Log In" %>  
   </div>

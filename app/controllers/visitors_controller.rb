@@ -7,7 +7,7 @@ class VisitorsController < ApplicationController
     @visitor = Visitor.new(visitor_params)
 
     if @visitor.save
-      session[:visitor_id] = @visitor.id
+      cookies.signed[:auth_token] = @visitor.auth_token
       redirect_to blogs_path, notice: 'Thank you for signing up'
     else
       render 'new'

@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_visitor
-    @current_visitor ||= Visitor.find_by_id(session[:visitor_id])
+    @current_visitor ||= Visitor.where.not(auth_token: nil).find_by(auth_token: cookies.signed[:auth_token])
   end
 
   # this will make current_visitor method be accessible from the view
