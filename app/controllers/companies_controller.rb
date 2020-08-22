@@ -4,7 +4,16 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
+    companies = Company.where(id: params[:company_ids])
+    if params[:name]
+      companies.update_all(name: params[:name])
+    end
+
     @companies = Company.all
+
+    # this is just a hack so i don't get such url after submission (/companies?company_ids%5B%5D=3&company_ids%5B%5D=2&name=new+company+name&commit=Update+company+names)
+    # it basically gives me a fresh /companies page without the inputted form values sticking around
+    redirect_to '/companies' unless request.fullpath == '/companies'
   end
 
   # GET /companies/1
