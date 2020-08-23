@@ -1,0 +1,19 @@
+<h1>Bulk update</h1>
+
+<%= form_tag companies_bulk_update_path, method: :patch do %>
+  <% @companies.each do |company| %>
+    <%= fields_for "companies_to_update", company do |cf| %>
+      <div class="field">
+        <%= hidden_field_tag 'companies_to_update[][id]', company.id, id: nil %>
+        <%= label_tag :name %><br>
+        <%= text_field_tag "companies_to_update[][name]", company.name, id: nil %>
+        <%= hidden_field_tag "companies_to_update[][created_at]", company.created_at, id: nil %>
+        <%= hidden_field_tag "companies_to_update[][updated_at]", DateTime.now, id: nil %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class="action">
+    <%= submit_tag "Update companies" %>  
+  </div>
+<% end %>

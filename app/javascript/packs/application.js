@@ -78,4 +78,11 @@ $(document).ready(function(){
 
   });
 
+  $('#add_new_company').on('click', function(e){
+    e.preventDefault();
+    $cloned_div = $('.company_div').first().clone();
+    div_to_insert = $cloned_div.prop('outerHTML');
+    $('#add_new_company').before(div_to_insert);
+  });
+
 });

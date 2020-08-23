@@ -60,6 +60,45 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def bulk_create_form
+  end
+
+  def bulk_create
+    # example: Company.create([{name: 'company1'}, {name: 'company2'}, {name: 'company3'}])
+    # note that this will make separate INSERT statements for each company that will be created
+    # params.require(:companies_to_create).map {|param| param.permit! }
+    # Company.create!(params[:companies_to_create])
+
+    # note this method is only available in Rails 6. It will do a single "bulk" INSERT statement to create all the companies
+    # If we need to ensure all rows are inserted we can use insert_all! the bang version directly.
+    company_ids = Company.insert_all!(params[:companies_to_create])
+    # this returns an #<ActiveRecord::Result, you can convert it to an array which will give you an array of id_value hashes created (in PostgreSQL but not in MySQL): [{"id"=>14}, {"id"=>15}]
+
+    # @companies = Company.where(id: company_ids.pluck('id'))
+
+    # Example (another table/model) using pure SQL
+      # insert into `shippers`(`ShipperID`,`CompanyName`,`Phone`) values
+      # (1,'Speedy Express','(503) 555-9831'),
+      # (2,'United Package','(503) 555-3199'),
+      # (3,'Federal Shipping','(503) 555-9931');
+
+    # You might need to configure max_allowed_packet, if you are inserting huge datasets
+
+    redirect_to companies_bulk_create_form_path, notice: "Created companies with the following ids: #{company_ids.pluck('id')}" #the company_ids is only valid for psql and sqlite
+  end
+
+  def bulk_update_form
+    @companies = Company.all
+  end
+
+  def bulk_update
+    # if the updated values is the same for all companies you can use: `update_all`
+
+    # note this method is only available in Rails 6 and will do an update if ID is found, otherwise it will do a create/INSERT
+    Company.upsert_all(params[:companies_to_update])
+    redirect_to companies_bulk_update_form_path, notice: "Updated companies"
+  end
+
   # DELETE /companies/1
   # DELETE /companies/1.json
   def destroy

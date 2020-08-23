@@ -1,0 +1,17 @@
+<h1>Bulk create</h1>
+
+<%= form_tag companies_bulk_create_path, method: :post do %>
+  <div class="field company_div">
+    <%= label_tag :name %><br>
+    <!-- this will give you the following in params: "companies_to_create"=>[{"name"=>"value"}, {"name"=>"value"}] -->
+    <%= text_field_tag "companies_to_create[][name]", nil, id: nil %>
+    <%= hidden_field_tag "companies_to_create[][created_at]", DateTime.now, id: nil %>
+    <%= hidden_field_tag "companies_to_create[][updated_at]", DateTime.now, id: nil %>
+  </div>
+
+  <%= link_to "Add new", "#", id: 'add_new_company' %>
+
+  <div class="action">
+    <%= submit_tag "Create companies" %>  
+  </div>
+<% end %>

@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  match '/companies/bulk_create',          to: 'companies#bulk_create_form',        via: :get,           as:   :companies_bulk_create_form
+  match '/companies/bulk_create',          to: 'companies#bulk_create',             via: :post,          as:   :companies_bulk_create
+  match '/companies/bulk_update',          to: 'companies#bulk_update_form',        via: :get,           as:   :companies_bulk_update_form
+  match '/companies/bulk_update',          to: 'companies#bulk_update',             via: [:patch, :put], as:   :companies_bulk_update
+
   resources :companies
   resources :sessions
   resources :visitors
