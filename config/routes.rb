@@ -24,5 +24,9 @@ Rails.application.routes.draw do
   match '/users/:id',      to: 'users#update',  via: [:patch, :put]
   match '/users/:id',      to: 'users#destroy', via: :delete
 
+  match '/albums',           to: 'albums#index',   via: :get,           as:   :albums
+  match '/albums',           to: 'albums#create',  via: :post
+  match '/albums/new',       to: 'albums#new',     via: :get,           as:   :new_album
+
   match '*a', to: 'application#routing_error', via: %i[delete get patch put post]
 end
