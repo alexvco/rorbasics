@@ -1,0 +1,6 @@
+{
+	"extends": "stylelint-config-recommended",
+	"rules": {
+		/* exceptions to the rule go here */
+	}
+}
