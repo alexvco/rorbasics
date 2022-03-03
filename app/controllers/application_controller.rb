@@ -1,3 +1,4 @@
+# :reek:MissingSafeMethod
 class ApplicationController < ActionController::Base
   rescue_from StandardError, with: :render_500
 
@@ -21,6 +22,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, alert: "Requested page was not found."
   end
 
+  # :reek:UncommunicativeMethodName
   def render_500(exception)
     raise exception if Rails.env.development? || Rails.env.test?
 

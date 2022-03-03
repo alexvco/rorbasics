@@ -1,4 +1,5 @@
 class AlbumsController < ApplicationController
+  # :reek:FeatureEnvy
   def index
     req = Net::HTTP::Get.new(uri.request_uri)
     req["Access-Token"] = "my_access_token_value"
