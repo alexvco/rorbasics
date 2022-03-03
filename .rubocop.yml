@@ -10,6 +10,7 @@ AllCops:
   - db/migrate/*
   - doc/**/*
   - frontend/**/*
+  - node_modules/**/*
   - vendor/**/*
   - lib/templates/active_record/**/*
 Rails/ApplicationController:
