@@ -8,9 +8,9 @@ class VisitorsController < ApplicationController
 
     if @visitor.save
       cookies.signed[:auth_token] = @visitor.auth_token
-      redirect_to blogs_path, notice: 'Thank you for signing up'
+      redirect_to blogs_path, notice: "Thank you for signing up"
     else
-      render 'new'
+      render "new"
     end
   end
 

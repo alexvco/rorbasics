@@ -2,11 +2,11 @@ class Category < ApplicationRecord
   has_and_belongs_to_many :blogs, join_table: :blogs_categories
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
-  before_destroy :destroy_its_blogs
   before_save :squish_name
+  before_destroy :destroy_its_blogs
 
   def squish_name
-    self.name = self.name.squish
+    self.name = name.squish
   end
 
   def destroy_its_blogs

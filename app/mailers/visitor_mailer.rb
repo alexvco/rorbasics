@@ -1,5 +1,4 @@
 class VisitorMailer < ApplicationMailer
-
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
@@ -10,12 +9,12 @@ class VisitorMailer < ApplicationMailer
     @visitor = visitor
 
     mail(
-      from: 'hello@example.com', 
-      to: [visitor.email, 'another@gmail.com'], 
-      cc: 'a@gmail.com', 
-      bcc: 'b@gmail.com', 
-      subject: 'Password Reset Instructions',
-      reply_to: 'c@gmail.com'
+      from: "hello@example.com",
+      to: [visitor.email, "another@gmail.com"],
+      cc: "a@gmail.com",
+      bcc: "b@gmail.com",
+      subject: "Password Reset Instructions",
+      reply_to: "c@gmail.com"
     )
   end
 end

@@ -5,8 +5,9 @@ class ApplicationRecord < ActiveRecord::Base
   # and passing column allows you to generate token for more than 1 attribute (auth_token, reset_token, etc...)
   # Remember this is an INSTANCE method that could be shared between different models
   def generate_token(column)
-    begin
+    loop do
       self[column] = SecureRandom.urlsafe_base64(128)
-    end while self.class.exists?(column => self[column])
+      break unless self.class.exists?(column => self[column])
+    end
   end
 end

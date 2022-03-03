@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  match '/companies/bulk_create',          to: 'companies#bulk_create_form',        via: :get,           as:   :companies_bulk_create_form
-  match '/companies/bulk_create',          to: 'companies#bulk_create',             via: :post,          as:   :companies_bulk_create
-  match '/companies/bulk_update',          to: 'companies#bulk_update_form',        via: :get,           as:   :companies_bulk_update_form
-  match '/companies/bulk_update',          to: 'companies#bulk_update',             via: [:patch, :put], as:   :companies_bulk_update
+  get "/companies/bulk_create", to: "companies#bulk_create_form", as: :companies_bulk_create_form
+  post "/companies/bulk_create", to: "companies#bulk_create", as: :companies_bulk_create
+  get "/companies/bulk_update", to: "companies#bulk_update_form", as: :companies_bulk_update_form
+  match "/companies/bulk_update",          to: "companies#bulk_update", via: [:patch, :put],
+                                           as: :companies_bulk_update
 
   resources :companies
   resources :sessions
@@ -10,23 +11,23 @@ Rails.application.routes.draw do
   resources :addresses
   resources :categories
   resources :password_resets
-  root 'blogs#index'
+  root "blogs#index"
 
   resources :images
   resources :blogs
   # resources :users
 
-  match '/users',          to: 'users#index',   via: :get,           as:   :users
-  match '/users',          to: 'users#create',  via: :post
-  match '/users/new',      to: 'users#new',     via: :get,           as:   :new_user
-  match '/users/:id/edit', to: 'users#edit',    via: :get,           as:   :edit_user
-  match '/users/:id',      to: 'users#show',    via: :get,           as:   :user
-  match '/users/:id',      to: 'users#update',  via: [:patch, :put]
-  match '/users/:id',      to: 'users#destroy', via: :delete
+  get "/users", to: "users#index", as: :users
+  post "/users", to: "users#create"
+  get "/users/new", to: "users#new", as:   :new_user
+  get "/users/:id/edit", to: "users#edit", as: :edit_user
+  get "/users/:id", to: "users#show", as: :user
+  match "/users/:id",      to: "users#update", via: [:patch, :put]
+  delete "/users/:id", to: "users#destroy"
 
-  match '/albums',           to: 'albums#index',   via: :get,           as:   :albums
-  match '/albums',           to: 'albums#create',  via: :post
-  match '/albums/new',       to: 'albums#new',     via: :get,           as:   :new_album
+  get "/albums", to: "albums#index", as: :albums
+  post "/albums", to: "albums#create"
+  get "/albums/new", to: "albums#new", as: :new_album
 
-  match '*a', to: 'application#routing_error', via: %i[delete get patch put post]
+  match "*a", to: "application#routing_error", via: %i[delete get patch put post]
 end

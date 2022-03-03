@@ -7,14 +7,13 @@ class AddressesController < ApplicationController
     address_count = Address.count
     @page_number = params[:page].to_i.positive? ? params[:page].to_i : 1
     offset = Address::PER_PAGE * (@page_number - 1)
-    @number_of_pages = (address_count.to_f/Address::PER_PAGE).ceil
+    @number_of_pages = (address_count.to_f / Address::PER_PAGE).ceil
     @addresses = Address.order(id: :asc).limit(Address::PER_PAGE).offset(offset)
   end
 
   # GET /addresses/1
   # GET /addresses/1.json
-  def show
-  end
+  def show; end
 
   # GET /addresses/new
   def new
@@ -34,7 +33,7 @@ class AddressesController < ApplicationController
 
     respond_to do |format|
       if @address.save
-        format.html { redirect_to @address, notice: 'Address was successfully created.' }
+        format.html { redirect_to @address, notice: "Address was successfully created." }
         format.json { render :show, status: :created, location: @address }
       else
         format.html { render :new }
@@ -48,7 +47,7 @@ class AddressesController < ApplicationController
   def update
     respond_to do |format|
       if @address.update(address_params)
-        format.html { redirect_to @address, notice: 'Address was successfully updated.' }
+        format.html { redirect_to @address, notice: "Address was successfully updated." }
         format.json { render :show, status: :ok, location: @address }
       else
         format.html { render :edit }
@@ -62,19 +61,21 @@ class AddressesController < ApplicationController
   def destroy
     @address.destroy
     respond_to do |format|
-      format.html { redirect_to addresses_url, notice: 'Address was successfully destroyed.' }
+      format.html { redirect_to addresses_url, notice: "Address was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_address
-      @address = Address.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def address_params
-      params.require(:address).permit(:city, :zip, :street, :user_id, user_attributes: [:id, :first_name, :last_name, :email, :type])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_address
+    @address = Address.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def address_params
+    params.require(:address).permit(:city, :zip, :street, :user_id,
+                                    user_attributes: [:id, :first_name, :last_name, :email, :type])
+  end
 end
