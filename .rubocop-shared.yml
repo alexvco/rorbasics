@@ -1,0 +1,149 @@
+AllCops:
+  NewCops: enable
+  DisplayCopNames: true
+  SuggestExtensions:
+    rubocop-rspec: false
+  Exclude:
+  - bin/*
+  - db/migrate/*
+  - db/schema.rb
+  - frontend/node_modules/**/*
+  - node_modules/**/*
+  - vendor/**/*
+Bundler/OrderedGems:
+  Enabled: false
+Layout/CaseIndentation:
+  EnforcedStyle: end
+Layout/DotPosition:
+  EnforcedStyle: leading
+# NOTE: we don't care
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: variable
+Layout/FirstArgumentIndentation:
+  EnforcedStyle: consistent
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+Layout/LineLength:
+  Max: 120
+  AutoCorrect: true
+  Exclude:
+  - db/schema.rb
+# NOTE: we don't care
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+# NOTE: we don't care
+Layout/MultilineOperationIndentation:
+  Enabled: false
+# NOTE: we don't care
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+# NOTE: we don't care
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
+# NOTE: JR set up and specs require empty blocks
+Lint/EmptyBlock:
+  Exclude:
+  - config/routes.rb
+  - config/routes/**/*
+  - spec/**/*
+# NOTE: we don't care
+Lint/MissingCopEnableDirective:
+  Enabled: false
+# TODO: potentially enable after v1.10.0
+Lint/SymbolConversion:
+  Enabled: false
+# NOTE: codeclimate for metrics
+Metrics/AbcSize:
+  Max: 60
+Metrics/BlockLength:
+  Enabled: false
+Metrics/BlockNesting:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
+Metrics/ParameterLists:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+# TODO: reevaluate all disabled rules below after v1.10.0
+Naming/AccessorMethodName:
+  Enabled: false
+Naming/FileName:
+  Enabled: false
+Naming/HeredocDelimiterNaming:
+  Enabled: false
+Naming/PredicateName:
+  ForbiddenPrefixes:
+  - is_
+Naming/RescuedExceptionsVariableName:
+  PreferredName: err
+# NOTE: we don't care
+Style/AccessorGrouping:
+  Enabled: false
+Style/Alias:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/CollectionMethods:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/DoubleNegation:
+  Enabled: false
+Style/EachWithObject:
+  Enabled: false
+Style/FormatString:
+  Enabled: false
+Style/FormatStringToken:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
+Style/Lambda:
+  Enabled: false
+Style/LambdaCall:
+  Exclude:
+  - app/views/**/*
+Style/ModuleFunction:
+  EnforcedStyle: extend_self
+Style/NegatedIf:
+  EnforcedStyle: postfix
+Style/NegatedWhile:
+  Enabled: false
+Style/NumericLiterals:
+  Enabled: false
+Style/PercentLiteralDelimiters:
+  Enabled: false
+Style/RegexpLiteral:
+  Enabled: false
+Style/RescueStandardError:
+  EnforcedStyle: implicit
+Style/SignalException:
+  Enabled: false
+Style/SpecialGlobalVars:
+  Enabled: false
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+Style/SymbolArray:
+  Enabled: false
+Style/TrailingCommaInArguments:
+  Enabled: false
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+Style/WordArray:
+  Enabled: false

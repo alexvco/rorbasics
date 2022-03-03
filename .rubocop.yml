@@ -1,0 +1,50 @@
+inherit_from:
+- ./.rubocop-shared.yml
+- ./.rubocop-rails.yml
+require:
+- ./config/cops/style/class_and_module_children_nested.rb
+AllCops:
+  Exclude:
+  - bin/*
+  - db/schema.rb
+  - db/migrate/*
+  - doc/**/*
+  - frontend/**/*
+  - vendor/**/*
+  - lib/templates/active_record/**/*
+Rails/ApplicationController:
+  Enabled: false
+Rails/ApplicationMailer:
+  Enabled: false
+Rails/Output:
+  Exclude:
+  - app/admin/**/*
+Style/ClassAndModuleChildren:
+  Enabled: true
+  EnforcedStyle: compact
+  Exclude:
+  - app/forms/**/*
+  - app/queries/**/*
+  - app/presenters/**/*
+  - app/services/**/*
+  - config/initializers/**/*
+  - db/seeds/**/*
+  - db/wiley/**/*
+  - spec/support/**/*
+Style/ClassAndModuleChildrenNested:
+  SupportedStyles:
+  - nested
+  - compact
+  EnforcedStyle: nested
+  Include:
+  - app/forms/**/*
+  - app/queries/**/*
+  - app/presenters/**/*
+  - app/services/**/*
+  - config/initializers/**/*
+  - db/seeds/**/*
+  - db/wiley/**/*
+  - spec/support/**/*
+Naming/VariableNumber:
+  Exclude:
+  - spec/**/*

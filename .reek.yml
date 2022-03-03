@@ -1,0 +1,55 @@
+---
+detectors:
+  IrresponsibleModule:
+    enabled: false
+  TooManyInstanceVariables:
+    enabled: false
+  UtilityFunction:
+    enabled: false
+  DuplicateMethodCall:
+    enabled: false
+  UncommunicativeVariableName:
+    enabled: false
+  TooManyStatements:
+    max_statements: 8
+  FeatureEnvy:
+    exclude:
+      - "/Job[#|:]/"
+  NilCheck:
+    enabled: false
+  UncommunicativeModuleName:
+    accept:
+      - V1
+      - V2
+directories:
+  "app/controllers":
+    InstanceVariableAssumption:
+      enabled: false
+    TooManyStatements:
+      enabled: false
+  "app/mailers":
+    InstanceVariableAssumption:
+      enabled: false
+  "app/reports/**":
+    BooleanParameter:
+      enabled: false
+    ControlParameter:
+      enabled: false
+    DataClump:
+      enabled: false
+    FeatureEnvy:
+      enabled: false
+    RepeatedConditional:
+      enabled: false
+  "app/services/pdf":
+    FeatureEnvy:
+      enabled: false
+    RepeatedConditional:
+      enabled: false
+    TooManyStatements:
+      max_statements: 30
+  "db/**":
+    FeatureEnvy:
+      enabled: false
+    TooManyStatements:
+      enabled: false
