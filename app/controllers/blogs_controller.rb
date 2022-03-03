@@ -4,13 +4,13 @@ class BlogsController < ApplicationController
   # GET /blogs
   # GET /blogs.json
   def index
-    if !current_user
-      @blogs = Blog.where(status: 2)
+    @blogs = if !current_user
+      Blog.where(status: 2)
     elsif current_user.member?
-      @blogs = Blog.where("status = ? OR status = ?", 1, 2)
+      Blog.where("status = ? OR status = ?", 1, 2)
     else # current_user.author?
-      @blogs = Blog.where("user_id = ? OR status = ? OR status = ?", current_user.id, 1, 2)
-      # @blogs = current_user.blogs.or( Blog.where(status: 1).or(Blog.where(status: 2)) ) # I prefer the SQL syntax much better
+      Blog.where("user_id = ? OR status = ? OR status = ?", current_user.id, 1, 2)
+      # @blogs = current_user.blogs.or( Blog.where(status: 1).or(Blog.where(status: 2)) ) # I prefer the SQL syntax
     end
 
     return @blogs if params[:search].blank?
@@ -37,9 +37,13 @@ class BlogsController < ApplicationController
     # Blog.where('id < 1').merge(Blog.where(id: 4))
     # => #<ActiveRecord::Relation []>
     # Blog.where('id < 1').or(Blog.where(id: 4))
-    # => #<ActiveRecord::Relation [#<Blog id: 4, user_id: 3, title: "Joes paid blog 1", body: "content for joes paid blog 1", status: "Paid", created_at: "2020-08-02 07:26:37", updated_at: "2020-08-02 07:26:37">]>
+    # => #<ActiveRecord::Relation [#<Blog id: 4, user_id: 3, title: "Joes paid blog 1",
+    # body: "content for joes paid blog 1", status: "Paid", created_at: "2020-08-02 07:26:37",
+    # updated_at: "2020-08-02 07:26:37">]>
     # Blog.where('id in (2,4)').merge(Blog.where(id: 4))
-    # => #<ActiveRecord::Relation [#<Blog id: 4, user_id: 3, title: "Joes paid blog 1", body: "content for joes paid blog 1", status: "Paid", created_at: "2020-08-02 07:26:37", updated_at: "2020-08-02 07:26:37">]>
+    # => #<ActiveRecord::Relation [#<Blog id: 4, user_id: 3, title: "Joes paid blog 1",
+    # body: "content for joes paid blog 1", status: "Paid", created_at: "2020-08-02 07:26:37",
+    # updated_at: "2020-08-02 07:26:37">]>
 
     # Syntax to render default 404 page
     # render :file => "#{Rails.root}/public/404.html",  layout: false, status: :not_found

@@ -14,7 +14,8 @@ class PasswordResetsController < ApplicationController
 
   def update
     @visitor = Visitor.find_by!(password_reset_token: params[:id])
-    if @visitor.password_reset_sent_at < (Time.now.utc - 2.hours) # aka less than 2.hours.ago but in utc cause thats how it is saved in db
+    # aka less than 2.hours.ago but in utc cause thats how it is saved in db
+    if @visitor.password_reset_sent_at < (Time.now.utc - 2.hours)
       redirect_to new_password_reset_path, alert: "Password reset has expired."
     elsif @visitor.update(visitor_params)
       redirect_to root_url, notice: "Password reset successful"

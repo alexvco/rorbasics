@@ -1,4 +1,5 @@
 # :reek:MissingSafeMethod
+# rubocop:disable Naming/VariableNumber
 class ApplicationController < ActionController::Base
   rescue_from StandardError, with: :render_500
 

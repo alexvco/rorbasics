@@ -11,7 +11,8 @@ class CompaniesController < ApplicationController
 
     @companies = Company.all
 
-    # this is just a hack so i don't get such url after submission (/companies?company_ids%5B%5D=3&company_ids%5B%5D=2&name=new+company+name&commit=Update+company+names)
+    # this is just a hack so i don't get such url after submission
+    # (/companies?company_ids%5B%5D=3&company_ids%5B%5D=2&name=new+company+name&commit=Update+company+names)
     # it basically gives me a fresh /companies page without the inputted form values sticking around
     redirect_to "/companies" unless request.fullpath == "/companies"
   end
@@ -66,10 +67,12 @@ class CompaniesController < ApplicationController
     # params.require(:companies_to_create).map {|param| param.permit! }
     # Company.create!(params[:companies_to_create])
 
-    # NOTE: this method is only available in Rails 6. It will do a single "bulk" INSERT statement to create all the companies
+    # NOTE: this method is only available in Rails 6.
+    # It will do a single "bulk" INSERT statement to create all the companies
     # If we need to ensure all rows are inserted we can use insert_all! the bang version directly.
     company_ids = Company.insert_all!(params[:companies_to_create])
-    # this returns an #<ActiveRecord::Result, you can convert it to an array which will give you an array of id_value hashes created (in PostgreSQL but not in MySQL): [{"id"=>14}, {"id"=>15}]
+    # this returns an #<ActiveRecord::Result, you can convert it to an array which will give you an array of
+    # id_value hashes created (in PostgreSQL but not in MySQL): [{"id"=>14}, {"id"=>15}]
 
     # @companies = Company.where(id: company_ids.pluck('id'))
 
@@ -81,7 +84,9 @@ class CompaniesController < ApplicationController
 
     # You might need to configure max_allowed_packet, if you are inserting huge datasets
 
-    redirect_to companies_bulk_create_form_path, notice: "Created companies with the following ids: #{company_ids.pluck("id")}" # the company_ids is only valid for psql and sqlite
+    redirect_to companies_bulk_create_form_path,
+                notice: "Created companies with the following ids: #{company_ids.pluck("id")}"
+    # the company_ids is only valid for psql and sqlite
   end
 
   def bulk_update_form
@@ -91,7 +96,8 @@ class CompaniesController < ApplicationController
   def bulk_update
     # if the updated values is the same for all companies you can use: `update_all`
 
-    # NOTE: this method is only available in Rails 6 and will do an update if ID is found, otherwise it will do a create/INSERT
+    # NOTE: this method is only available in Rails 6
+    # and will do an update if ID is found, otherwise it will do a create/INSERT
     Company.upsert_all(params[:companies_to_update])
     redirect_to companies_bulk_update_form_path, notice: "Updated companies"
   end
